@@ -1,0 +1,40 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class TriggerPad : MonoBehaviour
+{
+    public GameObject sphere;
+    public float growRate = 1f;
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            sphere.GetComponent<Renderer>().material.color = Color.green;
+        }
+            
+    }
+    //shrinks down to 0.01 instead of growing
+    void OnTriggerStay(Collider other)
+    {
+        if(other.CompareTag("Player"))
+        {
+            sphere.transform.localScale += new Vector3(0.1F, .1f, .1f) * growRate * Time.deltaTime;
+            
+            //sphere.transform.localScale = Vector3.one * 1.1f;
+        }
+        
+    }
+
+    
+    void OnTriggerExit(Collider other)
+    {
+        if(other.CompareTag("Player"))
+        {
+            sphere.transform.localScale = Vector3.one;
+
+            sphere.GetComponent<Renderer>().material.color = Color.yellow;
+        }
+    }
+}
