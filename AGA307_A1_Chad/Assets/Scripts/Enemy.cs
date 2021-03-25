@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    float moveDistance = 500;
+    public float moveDistance = 500;
 
     public EnemyType myType;
     public int health;
@@ -12,21 +12,31 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
-        //SetStartHealth()
-        if (myType == EnemyType.Ranged)
-            health = 50;
-        if (myType == EnemyType.Light)
-            health = 100;
-        if (myType == EnemyType.Heavy)
-            health = 200;
+        SetUp();
+    }
+
+    void SetUp()
+    {
+        switch(myType)
+        {
+            case EnemyType.Ranged:
+                health = 50;
+                break;
+            case EnemyType.Light:
+                health = 100;
+                break;
+            case EnemyType.Heavy:
+                health = 200;
+                break;
+        }
     }
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
+       // if(Input.GetKeyDown(KeyCode.Space))
+       // {
             StartCoroutine(Move());
-        }
+        //}
 
         if (Input.GetKeyDown("k"))
             Die();
@@ -41,7 +51,7 @@ public class Enemy : MonoBehaviour
             
         }
 
-        transform.Rotate(Vector3.up * 180);
+        //transform.Rotate(Vector3.up * 180);
 
         yield return new WaitForSeconds(3);
 

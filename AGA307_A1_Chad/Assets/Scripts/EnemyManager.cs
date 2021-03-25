@@ -11,6 +11,9 @@ public class EnemyManager : MonoBehaviour
 
     public List<GameObject> enemies;
 
+    public EnemySize size;
+    float scaleFactor = 1;
+
 
     void Start()
     {
@@ -19,6 +22,8 @@ public class EnemyManager : MonoBehaviour
             print(i);
        }*/
         SpawnEnemy();
+
+        SetUp();
     }
 
     void SpawnEnemy()
@@ -37,6 +42,21 @@ public class EnemyManager : MonoBehaviour
         print("Enemy Count: " + enemies.Count);
     }
 
+    void SetUp()
+    {
+        switch(size)
+        {
+            case EnemySize.Small:
+                transform.localScale = Vector3.one * scaleFactor;
+                break;
+            case EnemySize.Medium:
+                transform.localScale = Vector3.one * scaleFactor;
+                break;
+            case EnemySize.Large:
+                transform.localScale = Vector3.one * scaleFactor;
+                break;
+        }
+    }
 
     void Update()
     {
@@ -51,4 +71,13 @@ public class EnemyManager : MonoBehaviour
         else
             Destroy(gameObject);
     }
+
+
+}
+
+public enum EnemySize
+{
+    Small,
+    Medium,
+    Large
 }
